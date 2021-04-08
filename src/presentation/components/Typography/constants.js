@@ -12,6 +12,7 @@ export const FontTheme = {
         lightRed: 'hsl(355, 100%, 74%)',
         darkBlue: 'hsl(208, 49%, 24%)',
         grayishBlue: 'hsl(207, 13%, 34%)',
+        lightGrayishBlue: 'hsl(240, 2%, 79%)',
         darkBlackBlue: 'hsl(240, 10%, 16%)',
     },
     Weight: {
@@ -30,6 +31,8 @@ export const FontTheme = {
         title: '24px',
         bigTitle: '45px',
         motto: '70px',
+        mobileMotto: '36px',
+        mobileBigTitle: '32px',
     },
 
     Style: {

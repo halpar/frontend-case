@@ -12,7 +12,7 @@ export const theme = {
 
     layoutStyles: {
         headerColor: 'transparent',
-        footerColorDark: 'hsl(240, 10%, 16%)',
+        footerColor: 'hsl(240, 10%, 16%)',
 
         headerHeight: '120px',
         footerHeight: '410px',

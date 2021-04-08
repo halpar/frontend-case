@@ -18,6 +18,8 @@ export default styled(Header)`
     position: absolute;
     width: 100%;
     height: ${({ theme }) => theme.layoutStyles.headerHeight};
+    padding-left: ${between('16px', '120px')};
+    padding-right: ${between('16px', '120px')};
 `;
 
 export const NavItemStyles = styled(Col)``;

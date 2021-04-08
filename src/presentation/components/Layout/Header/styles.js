@@ -7,17 +7,21 @@ import Layout from '../index';
 
 const { Header } = Layout;
 
-// TODO ({ theme }) => theme.layoutStyles.paddingHorizontal)
-
 export default styled(Header)`
     z-index: 1000;
-    overflow: hidden;
-    padding-top: 50px !important;
     background: transparent;
-    padding: ${({ theme }) => theme.layoutStyles.headerPaddingVertical} ${between('0px', '120px')};
+    padding-left: ${between('16px', '120px')};
+    padding-right: ${between('16px', '120px')};
     position: absolute;
-    width: 100%;
     height: ${({ theme }) => theme.layoutStyles.headerHeight};
+    width: 100%;
+
+    .dispose-element {
+        display: none;
+    }
+`;
+export const HeaderItemsWrapper = styled(Row)`
+    height: 100%;
 `;
 
 export const NavItemStyles = styled(Col)``;

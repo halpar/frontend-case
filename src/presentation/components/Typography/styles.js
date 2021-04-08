@@ -37,6 +37,8 @@ const JointStyling = css`
                     return FontTheme.Color.darkBlue;
                 case 'grayish-blue':
                     return FontTheme.Color.grayishBlue;
+                case 'light-grayish-blue':
+                    return FontTheme.Color.lightGrayishBlue;
                 case 'dark-black-blue':
                     return FontTheme.Color.darkBlackBlue;
                 default:
@@ -81,6 +83,10 @@ const JointStyling = css`
                     return FontTheme.Size.bigTitle;
                 case 'motto':
                     return FontTheme.Size.motto;
+                case 'mobile-motto':
+                    return FontTheme.Size.mobileMotto;
+                case 'mobile-big-title':
+                    return FontTheme.Size.mobileBigTitle;
                 default:
                     return size;
             }

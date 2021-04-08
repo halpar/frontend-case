@@ -3,6 +3,8 @@ import { Row } from 'antd';
 import { StyledLandingPage } from './styles';
 import BannerSection from './BannerSection';
 import OverviewSection from './OverviewSection';
+import InfrastructureSection from './InfrastructureSection';
+import FeaturesSection from './FeaturesSection';
 
 const LandingPage = () => {
     console.log('landingpage');
@@ -13,6 +15,12 @@ const LandingPage = () => {
             </Row>
             <Row>
                 <OverviewSection />
+            </Row>
+            <Row style={{ paddingTop: '10vh' }}>
+                <InfrastructureSection />
+            </Row>
+            <Row style={{ paddingTop: '10vh' }}>
+                <FeaturesSection />
             </Row>
         </StyledLandingPage>
     );
