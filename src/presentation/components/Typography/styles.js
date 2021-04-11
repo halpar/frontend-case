@@ -2,6 +2,8 @@ import { Typography } from 'antd';
 import styled, { css } from 'styled-components';
 import { FontTheme } from './constants';
 
+const { Text: StyledText, Title: StyledTitle, Paragraph: StyledParagraph } = Typography;
+
 const JointStyling = css`
     &&& {
         display: ${({ display }) => display || ''};
@@ -128,14 +130,14 @@ const JointStyling = css`
     }
 `;
 
-export const Title = styled(Typography.Title)`
+export const Title = styled(StyledTitle)`
     ${JointStyling}
 `;
 
-export const Text = styled(Typography.Text)`
+export const Text = styled(StyledText)`
     ${JointStyling}
 `;
 
-export const Paragraph = styled(Typography.Paragraph)`
+export const Paragraph = styled(StyledParagraph)`
     ${JointStyling}
 `;

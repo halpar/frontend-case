@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from './presentation/themes/theme';
 import Routes from './utils/routes';
 import './App.less';
+import './i18n';
 
 export default function App() {
     return (

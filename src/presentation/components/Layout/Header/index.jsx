@@ -1,94 +1,118 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Menu } from 'antd';
+import { Col, Row, Tooltip } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
-import StyledHeader, { NavItemStyles, CustomBtn, HeaderItemsWrapper } from './styles';
+import { UserOutlined } from '@ant-design/icons';
+import StyledHeader, {
+    NavItemStyles,
+    CustomBtn,
+    HeaderItemsWrapper,
+    GlobalStyleForTooltip,
+    UserImageWrapper,
+    MainLogoWrapper,
+    RightSide,
+} from './styles';
 import { Text } from '../../Typography/styles';
 import useResponsive from '../../../../utils/Hooks/useMediaQuery';
 import BlogrIcon from '../../../../assets/layout/logo.svg';
 import Button from '../../Button';
 import HamburgerMenuIcon from '../../../../assets/layout/icon-hamburger.svg';
+import PopoverMenu from './PopoverMenu';
+import PopoverMenuLg from './PopoverMenuLg';
+import LoginModal from '../../LoginModal';
+import { setLanguage } from '../../../../utils/Redux/language/action';
 
-const userHeaderContent = [
-    {
-        id: 1,
-        name: 'Profile',
-        path: '/profile',
-    },
-    {
-        id: 2,
-        name: 'About US',
-        path: '/about-us',
-    },
-    {
-        id: 3,
-        name: 'Home',
-        path: '/',
-    },
-];
-
-const guestHeaderContent = [
-    {
-        id: 1,
-        name: 'About US',
-        path: '/about-us',
-    },
-    {
-        id: 2,
-        name: 'Home',
-        path: '/',
-    },
-];
-
-const HeaderNavItems = (type) => (type === 'user' ? userHeaderContent : guestHeaderContent);
-
-const Header = ({ userRole }) => {
+const Header = ({ userInfo }) => {
     const history = useHistory();
+    const dispatch = useDispatch();
+    const { xs, sm } = useResponsive();
+    const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
+    const { t, i18n } = useTranslation('common');
 
     const onClickLogo = () => {
         history.push('/');
     };
-    const { xs, sm, md, lg, xl } = useResponsive();
+
+    const handleCancel = () => {
+        setIsLoginModalVisible(false);
+    };
+
+    useEffect(() => {
+        dispatch(setLanguage(i18n.language));
+    }, [dispatch, i18n.language]);
+
+    const { languageInfo } = useSelector((state) => state.languageStore);
+
+    const HeaderNavItems = (payload) =>
+        payload ? t('userHeaderContent', { returnObjects: true }) : t('guestHeaderContent', { returnObjects: true });
 
     return (
         <StyledHeader>
             <HeaderItemsWrapper align="middle" justify="start">
-                <Col xs={4} sm={4} md={4} lg={3} xl={3} xxl={3} onClick={() => onClickLogo()}>
+                <MainLogoWrapper xs={8} sm={8} md={4} lg={4} xl={4} xxl={4} onClick={() => onClickLogo()}>
                     <img src={BlogrIcon} alt="bloggr-logo" />
-                </Col>
-                <Col className={(xs || sm) && 'dispose-element'} span={10}>
-                    <Row align="middle" justify="start" gutter={[32, 0]}>
-                        {HeaderNavItems(userRole).map(({ id, name, path }) => (
-                            <NavItemStyles onClick={() => history.push(path)} key={id}>
-                                <Button type="link">
-                                    <Text color="white" weight="medium" family="secondary">
-                                        {name}
-                                    </Text>
-                                </Button>
-                            </NavItemStyles>
-                        ))}
+                </MainLogoWrapper>
+                <RightSide xs={16} sm={16} md={20} lg={20} xl={20} xxl={20}>
+                    <Row align="middle" justify="space-between">
+                        <Col className={(xs || sm) && 'dispose-element'} span={17}>
+                            <Row align="middle" justify="start" gutter={[32, 0]}>
+                                {HeaderNavItems(userInfo).map(({ id, name, path }) => (
+                                    <NavItemStyles onClick={() => history.push(path)} key={id}>
+                                        <Button type="link">
+                                            <Text color="white" weight="medium" family="secondary">
+                                                {name}
+                                            </Text>
+                                        </Button>
+                                    </NavItemStyles>
+                                ))}
+                            </Row>
+                        </Col>
+                        <Col xs={24} sm={24} md={7} lg={7} xl={7} xxl={7}>
+                            {xs || sm ? (
+                                <Row align="middle" justify="end">
+                                    <GlobalStyleForTooltip />
+                                    <Tooltip
+                                        title={<PopoverMenu xs={xs} sm={sm} userInfo={userInfo} setIsLoginModalVisible={setIsLoginModalVisible} />}
+                                        trigger={['click', 'hover']}>
+                                        <Button type="link">
+                                            <img src={HamburgerMenuIcon} alt="hamburger-menu" />
+                                        </Button>
+                                    </Tooltip>
+                                </Row>
+                            ) : (
+                                <Row align="middle" justify="end" gutter={[32, 32]}>
+                                    <Col>
+                                        <Row align="middle" justify="center">
+                                            <GlobalStyleForTooltip />
+                                            <Tooltip title={<PopoverMenuLg isLocalizationMenu />} trigger={['click', 'hover']}>
+                                                <Text weight="bold" color="#ffffff" disableSelect style={{ cursor: 'pointer', lineHeight: '28px' }}>
+                                                    {languageInfo.toUpperCase()}
+                                                </Text>
+                                            </Tooltip>
+                                        </Row>
+                                    </Col>
+                                    {userInfo ? (
+                                        <Col>
+                                            <GlobalStyleForTooltip />
+                                            <Tooltip title={<PopoverMenuLg userInfo={userInfo} />} trigger={['click', 'hover']}>
+                                                <UserImageWrapper style={{ padding: '5px', border: '1px solid #ffffff', borderRadius: '90%' }}>
+                                                    <UserOutlined style={{ color: '#ffffff', fontSize: '21px' }} />
+                                                </UserImageWrapper>
+                                            </Tooltip>
+                                        </Col>
+                                    ) : (
+                                        <Col>
+                                            <CustomBtn onClick={() => setIsLoginModalVisible(true)}>{t('login')}</CustomBtn>
+                                        </Col>
+                                    )}
+                                </Row>
+                            )}
+                        </Col>
                     </Row>
-                </Col>
-                <Col xs={20} sm={20} md={10} lg={11} xl={11} xxl={11}>
-                    {xs || sm ? (
-                        <Row align="middle" justify="end">
-                            <img src={HamburgerMenuIcon} alt="hamburger-menu" />
-                        </Row>
-                    ) : (
-                        <Row align="middle" justify="end" gutter={[32, 0]}>
-                            <Col>
-                                <Button type="link">
-                                    <Text color="white" weight="medium" family="secondary">
-                                        Login
-                                    </Text>
-                                </Button>
-                            </Col>
-                            <Col>
-                                <CustomBtn>Sign Up</CustomBtn>
-                            </Col>
-                        </Row>
-                    )}
-                </Col>
+                </RightSide>
             </HeaderItemsWrapper>
+            <LoginModal visible={isLoginModalVisible} setIsLoginModalVisible={setIsLoginModalVisible} onCancel={handleCancel} />
         </StyledHeader>
     );
 };

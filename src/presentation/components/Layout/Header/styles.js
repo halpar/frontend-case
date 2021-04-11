@@ -35,17 +35,27 @@ export const CustomBtn = styled(Button)`
     }
 `;
 
-// export const GlobalStyleForTooltip = createGlobalStyle`
-//   body {
-//     .ant-tooltip-inner {
-//       background-color: transparent;
-//       padding:0px;
-//       margin-top:-5px;
-//       border-radius:15px;
-//       box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-//     }
-//     .ant-tooltip-arrow{
-//         display:none
-//     }
-//   }
-// `;
+export const GlobalStyleForTooltip = createGlobalStyle`
+  body {
+    .ant-tooltip-inner {
+      background-color: transparent;
+      padding:0px;
+      margin-top:-5px;
+      border-radius:15px;
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    }
+    .ant-tooltip-arrow{
+        display:none
+    }
+  }
+`;
+
+export const UserImageWrapper = styled.div`
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const MainLogoWrapper = styled(Col)``;
+export const RightSide = styled(Col)``;

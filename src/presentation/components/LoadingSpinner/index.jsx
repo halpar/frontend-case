@@ -1,7 +1,7 @@
 import React from 'react';
 import { Spin, LoadingSpinnerStyles } from './styles';
 
-function LoadingSpinner({ check, size, fullHeight }) {
+function LoadingSpinner({ size, fullHeight }) {
     return (
         <LoadingSpinnerStyles fullHeight={fullHeight}>
             <Spin size={size || 'middle'} />

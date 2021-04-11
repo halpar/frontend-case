@@ -3,8 +3,8 @@ import { Button } from 'antd';
 import { ButtonTheme } from './constants';
 import { theme } from '../../themes/theme';
 
-const { primaryColor, lightColor, secondaryColor } = theme;
-const { hoverTertiary, defaultRadius, defaultShadow } = ButtonTheme;
+const { primaryColor, lightColor, primaryColorBrighter } = theme;
+const { defaultRadius, defaultShadow } = ButtonTheme;
 
 const PrimaryButtonStyles = css`
     background-color: ${lightColor};
@@ -20,13 +20,14 @@ const PrimaryButtonStyles = css`
 `;
 
 const SecondaryButtonStyles = css`
-    background-color: ${secondaryColor};
+    background-color: ${primaryColor};
     color: #ffffff;
-    border-color: ${secondaryColor};
+    border-color: ${primaryColor};
 
     &.ant-btn:hover,
     &.ant-btn:focus {
-        background-color: ${hoverTertiary};
+        color: #ffffff;
+        background-color: ${primaryColorBrighter};
     }
 `;
 
@@ -34,15 +35,6 @@ const LinkButtonStyles = css`
     background-color: transparent;
     color: ${primaryColor};
     border: none;
-    /* &.ant-btn {
-        padding: 0px;
-    }
-    &.ant-btn:hover,
-    &.ant-btn:focus {
-        background-color: transparent;
-        color: #39996d;
-        border: none;
-    } */
 `;
 
 const BorderedButton = css`

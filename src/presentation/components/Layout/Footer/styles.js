@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { between } from 'polished';
-import { Col, Row } from 'antd';
+import { Row } from 'antd';
 import Layout from '../index';
 
 const { Footer } = Layout;

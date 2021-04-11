@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-// import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Layout from '../presentation/components/Layout';
 import LayoutHeader from '../presentation/components/Layout/Header';
 import LayoutFooter from '../presentation/components/Layout/Footer';
@@ -8,24 +8,22 @@ import LayoutContent from '../presentation/components/Layout/Content';
 import LoadingSpinner from '../presentation/components/LoadingSpinner';
 
 // Main
-const MainLandingPage = lazy(() => import('../presentation/pages/Main/LandingPage'));
-const MainContactUsPage = lazy(() => import('../presentation/pages/Main/ContactUsPage'));
-const UserProfilePage = lazy(() => import('../presentation/pages/User/ProfilePage'));
+const LandingPage = lazy(() => import('../presentation/pages/LandingPage'));
+const ContactUsPage = lazy(() => import('../presentation/pages/ContactUsPage'));
 
 const Routes = () => {
-    // const isLoggedIn = useSelector((state) => state);
-    const userRole = localStorage.getItem('role');
+    const userInfoRedux = useSelector((state) => state.authStore.userInfo);
     return (
         <Router>
             <Layout>
-                <LayoutHeader userRole={userRole} />
+                <LayoutHeader userInfo={userInfoRedux} />
                 <Layout>
-                    <LayoutContent pageType="chefs">
+                    <LayoutContent>
                         <Suspense fallback={<LoadingSpinner fullHeight />}>
                             <Switch>
-                                {userRole === 'user' && <Route path="/user-profile" exact component={UserProfilePage} />}
-                                <Route path="/contact-us" exact component={MainContactUsPage} />
-                                <Route path="/" exact component={MainLandingPage} />
+                                <Route path="/contact-us" exact component={ContactUsPage} />
+                                <Route path="/" exact component={LandingPage} />
+                                {userInfoRedux && <Route path="/hello-scorp" exact component={LandingPage} />}
                             </Switch>
                         </Suspense>
                     </LayoutContent>

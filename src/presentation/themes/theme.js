@@ -1,7 +1,7 @@
 export const theme = {
     primaryColor: 'hsl(356, 100%, 66%)',
+    primaryColorBrighter: 'hsl(356, 100%, 60%)',
     primaryFadedColor: 'hsl(355, 100%, 74%)',
-    secondaryColor: '#E5B02C',
     secondaryFaded: '#FBF7F3',
 
     lightColor: '#ffffff',
@@ -13,14 +13,7 @@ export const theme = {
     layoutStyles: {
         headerColor: 'transparent',
         footerColor: 'hsl(240, 10%, 16%)',
-
         headerHeight: '120px',
-        footerHeight: '410px',
         contentHeight: '100vh',
-
-        headerPaddingVertical: '20px',
-        paddingHorizontal: '120px',
-        paddingTop: '45px',
     },
-    borderRadius: '10px',
 };

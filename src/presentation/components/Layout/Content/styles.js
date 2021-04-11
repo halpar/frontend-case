@@ -1,7 +1,6 @@
 /* eslint-disable sonarjs/no-identical-functions */
 import styled from 'styled-components';
 import { Layout } from 'antd';
-import { between } from 'polished';
 
 const { Content } = Layout;
 

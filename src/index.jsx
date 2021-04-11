@@ -2,8 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ConfigProvider } from 'antd';
 import enGB from 'antd/lib/locale-provider/en_GB';
+import { Provider } from 'react-redux';
+import { I18nextProvider } from 'react-i18next';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import i18n from './i18n';
+import store from './utils/Redux/store';
 
 // import { Provider } from "react-redux";
 // import store from './services/Redux/store';
@@ -15,9 +19,13 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
     <React.StrictMode>
-        <ConfigProvider locale={enGB}>
-            <App />
-        </ConfigProvider>
+        <Provider store={store}>
+            <ConfigProvider locale={enGB}>
+                <I18nextProvider i18n={i18n}>
+                    <App />
+                </I18nextProvider>
+            </ConfigProvider>
+        </Provider>
     </React.StrictMode>,
     document.getElementById('root')
 );
