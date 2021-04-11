@@ -26,7 +26,6 @@ const ContactUsPage = () => {
     const [form] = Form.useForm();
     const [userInfoToRender, setUserInfoToRender] = useState();
     const [phoneInputLocalization, setPhoneInputLocalization] = useState();
-    console.log(i18n.language, 'salanguage');
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
